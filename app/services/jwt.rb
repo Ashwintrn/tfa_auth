@@ -1,5 +1,5 @@
 class Jwt
-  SECRET_KEY = Rails.application.secrets.secret_key_base.to_s[0..10]
+  SECRET_KEY = Rails.application.secrets.secret_key_base.to_s[0..10] || '1234509876'
 
   def self.encode(payload, exp = 45.minutes.from_now)
     payload[:exp] = exp.to_i
