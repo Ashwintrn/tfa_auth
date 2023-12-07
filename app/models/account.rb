@@ -7,4 +7,10 @@ class Account < ApplicationRecord
   validates :email, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 8 }, if: -> { new_record? || !password.nil? }
+
+  after_create :send_welcome_email
+
+  def send_welcome_email
+    AccountMailer.welcome_email(id).deliver_now
+  end
 end

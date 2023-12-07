@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi <%= @account.name %>! Welcome to our App </p>
+    <p>
+    <p>To use our API, first scan this qr code with your google authenticator app from <%= @account.google_qr_uri %>
+    and then login with your credentials in the init_login API and provide the otp and the token in the follow up api </p> 
+  </body>
+</html>

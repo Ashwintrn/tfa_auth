@@ -11,10 +11,14 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(account_params)
     if @account.save
+      begin
+        @account.set_google_secret
+      rescue => e
+        render json: { errors: "Accoutn created but unable to set google key. Please contact your operator" }, status: :unprocessable_entity
+      end
       render json: @account, status: :created
     else
-      render json: { errors: @account.errors.full_messages },
-             status: :unprocessable_entity
+      render json: { errors: @account.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
