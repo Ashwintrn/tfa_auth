@@ -1,8 +1,8 @@
 class AuthenticationController < ApplicationController
-  before_action :authorize_request, except: :login
+  before_action :authorize_session, except: :init_login
 
   # POST /auth/login
-  def login
+  def init_login
     @account = Account.find_by_email(params[:email])
     if @account&.authenticate(params[:password])
       token = Jwt.encode(account_id: @account.id)

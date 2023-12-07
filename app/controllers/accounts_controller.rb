@@ -1,12 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :authorize_request, except: :create
-  before_action :find_account, except: %i[create index]
-
-  # GET /accounts
-  # def index
-  #   @accounts = Account.all
-  #   render json: @accounts, status: :ok
-  # end
+  before_action :authorize_session, except: %i[create]
+  before_action :find_account, except: %i[create]
 
   # GET /accounts/{accountname}
   def show

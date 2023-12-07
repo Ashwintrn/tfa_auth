@@ -1,3 +1,3 @@
-- thurs : authenticator , jwt log out
+- thurs : authenticator , jwt log out, email
 - fri : cors, rspec
 - sat : readme, docker

@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+  acts_as_google_authenticated lookup_token: :mfa_secret, encrypt_secrets: true
+
   has_secure_password
 
   validates :email, presence: true, uniqueness: true
