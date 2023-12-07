@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_07_054739) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_122949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_07_054739) do
     t.datetime "updated_at", null: false
     t.string "google_secret"
     t.integer "mfa_secret"
+    t.boolean "tfa_status", default: true
   end
 
 end

@@ -16,9 +16,7 @@ class AccountMfaSessionController < ApplicationController
 
   def logout
     begin
-      @current_account.mfa_secret = nil
-      @current_account.save!
-      AccountMfaSession.destroy
+      @current_account.logout_actions
       render json: { message: 'Logged out successfully' }, status: :ok
     rescue => e
       render json: { error: 'Code is not valid or wrong' }, status: 422

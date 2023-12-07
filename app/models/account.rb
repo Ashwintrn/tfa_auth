@@ -10,7 +10,19 @@ class Account < ApplicationRecord
 
   after_create :send_welcome_email
 
+  after_update :email_qr_and_reset_session, if: Proc.new { saved_change_to_attribute?(:tfa_status) }
+  
   def send_welcome_email
     AccountMailer.welcome_email(id).deliver_now
+  end
+
+  def email_qr_and_reset_session
+    logout_actions
+    send_welcome_email if tfa_status
+  end
+
+  def logout_actions
+    self.update_column(:mfa_secret, nil)
+    AccountMfaSession.destroy
   end
 end

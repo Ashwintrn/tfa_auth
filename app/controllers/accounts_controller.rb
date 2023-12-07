@@ -2,7 +2,9 @@ class AccountsController < ApplicationController
   before_action :authorize_session, except: %i[create]
   before_action :find_account, except: %i[create]
 
-  # GET /accounts/{accountname}
+  UPDATABLE_ATTR = ["name", "password", "tfa_status"]
+
+  # GET /accounts/
   def show
     render json: @account.as_json(except: :password_digest), status: :ok
   end
@@ -22,15 +24,17 @@ class AccountsController < ApplicationController
     end
   end
 
-  # PUT /accounts/{accountname}
+  # PUT /accounts/
   def update
-    unless @account.update(account_params)
-      render json: { errors: @account.errors.full_messages },
-             status: :unprocessable_entity
+    account_param = account_params.select { |key, _v| UPDATABLE_ATTR.include?(key.to_s)}
+    if @account.update(account_param)
+      render json: { message: "Account Settings Updated successfully"}, status: :ok
+    else
+      render json: { errors: @account.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  # DELETE /accounts/{accountname}
+  # DELETE /accounts/
   def destroy
     @account.destroy
   end
@@ -45,7 +49,7 @@ class AccountsController < ApplicationController
 
   def account_params
     params.permit(
-      :name, :email, :password, :password_confirmation
+      :name, :email, :password, :password_confirmation, :tfa_status
     )
   end
 end
