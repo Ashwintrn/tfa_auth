@@ -46,7 +46,7 @@ Rails.application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :user_name            => "gaming4ashwin@gmail.com",
-    :password             => "unvbpicusuzbjnzi",
+    :password             => "unvbpicusuzbjnzi", # ENV.fetch
     :authentication       => "plain",
     :enable_starttls_auto => true,
     :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE

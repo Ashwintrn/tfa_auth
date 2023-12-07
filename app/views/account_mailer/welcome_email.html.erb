@@ -3,9 +3,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Hi <%= @account.name %>! Welcome to our App </p>
+    <h1>Hi <%= @account.name %>!</h1>
+    <h3> Welcome to TFA authenticator Application</h3>
     <p>
-    <p>To use our API, first scan this qr code with your google authenticator app from <%= @account.google_qr_uri %>
-    and then login with your credentials in the init_login API and provide the otp and the token in the follow up api </p> 
+    <p>Welcome to our API platform! Start by logging in through the "Init Login" API using your credentials to acquire an access token. For added security, authorize your account
+      with the Google Authenticator app by Simply scanning the QR code provided <a href="<%= @account.google_qr_uri %>" style="text-decoration: underline; color: #0000EE;">here</a>
+      and use the previously obtained token along with the 6-digit code from your authenticator app in the "TFA Login" API.
+      Now you're ready to access any API within the specified time limit. 
   </body>
 </html>

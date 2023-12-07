@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
     authorize_request
     if @current_account&.tfa_status
       if !(account_mfa_session = AccountMfaSession.find) && (account_mfa_session ? account_mfa_session.record == @current_account : !account_mfa_session)
-        render json: { error: 'unauthorized' }, status: :unauthorized
+        render json: { error: 'Unable to Authorize, Please try again' }, status: :unauthorized
       end
     end
   end

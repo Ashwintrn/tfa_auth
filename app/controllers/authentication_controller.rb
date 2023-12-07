@@ -9,7 +9,7 @@ class AuthenticationController < ApplicationController
       time = Time.now + 45.minutes.to_i
       render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render json: { error: 'Unable to authorize, Please try again' }, status: :unauthorized
     end
   end
 

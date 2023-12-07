@@ -8,9 +8,9 @@ class AccountMfaSessionController < ApplicationController
     @current_account.save!
     if @current_account.google_authentic?(params[:mfa_code])
       AccountMfaSession.create(@current_account)
-      render json: { message: "Your 2fa was successfull, you can proceed to use the application"}, status: :ok
+      render json: { message: "Your 2fa was successfull, You can now proceed to use the application's API"}, status: :ok
     else
-      render json: { error: "Code is not valid or wrong" }, status: :unauthorized
+      render json: { error: "Invalid Code, Please try again" }, status: :unauthorized
     end
   end
 
@@ -19,7 +19,7 @@ class AccountMfaSessionController < ApplicationController
       @current_account.logout_actions
       render json: { message: 'Logged out successfully' }, status: :ok
     rescue => e
-      render json: { error: 'Code is not valid or wrong' }, status: 422
+      render json: { error: 'Something went wrong, Please try again' }, status: 422
     end
     #Blacklist tokens
   end
