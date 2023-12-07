@@ -24,6 +24,13 @@ module TfaAuth
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use Rack::Attack
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        resource '*', headers: :any
+      end
+    end
 
   end
 end
