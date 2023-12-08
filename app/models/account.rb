@@ -3,10 +3,20 @@ class Account < ApplicationRecord
 
   has_secure_password
 
+  PASSWORD_FORMAT = /\A
+  (?=.{12,})          # Must contain 8 or more characters
+  (?=.*\d)           # Must contain a digit
+  (?=.*[a-z])        # Must contain a lower case character
+  (?=.*[A-Z])        # Must contain an upper case character
+  (?=.*[[:^alnum:]]) # Must contain a symbol
+  /x
+
   validates :email, presence: true, uniqueness: true
   validates :email, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 8 }, if: -> { new_record? || !password.nil? }
+  validates :password, format: {
+    with: PASSWORD_FORMAT, message: "should have length more than 12 and contain a digit, a lower case and an upper case alphabet and a symbol"
+    }, if: -> { new_record? || !password.nil? }
 
   #when user is newly created we send them welcome email
   after_create :send_welcome_email 
