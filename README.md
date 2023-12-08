@@ -1,6 +1,34 @@
 # tfa_auth - Two-Factor Authentication (TFA) App
 tfa_auth is a Rails application that demonstrates the implementation of two-factor authentication (TFA) using Google Authenticator. The app provides both traditional password-based authentication and TFA one-time password (OTP) authentication for enhanced security.
 
+## How to Use
+Follow these steps to effectively use the tfa_auth application:
+
+### Create an Account:
+Register for an account by providing your name, email, and a secure password.
+### Receive Welcome Email:
+Upon successful registration, you will receive a welcome email containing a hyperlink to scan a QR code.
+### Scan QR Code:
+Use your Google Authenticator app to scan the QR code provided in the welcome email.
+### Traditional Login:
+Initiate your first login using the Traditional Login API.
+### TFA Login:
+For enhanced security, perform a TFA login using the access token obtained from the Traditional Login API and the code displayed in your Google Authenticator app.
+### Access API Endpoints:
+Congratulations! You are now logged in and can seamlessly utilize any available APIs without encountering unauthorized errors.
+### Handle Unauthorized Access:
+Ensure both Traditional Login and TFA Login are completed to avoid unauthorized errors.
+### Account Management:
+View and update your account details or log out of your session using the provided APIs.
+### Enable/Disable TFA:
+To enhance or adjust security settings, use the Update API with tfa_status set to false to disable TFA or true to enable it. Note that switching this setting will automatically log you out.
+### QR Code Registration:
+Upon enabling TFA, you will receive an email with instructions to scan a QR code and register your account.
+### TFA Disable:
+When TFA is disabled, you can access other APIs using only the token obtained from the Traditional Login API.
+### Logout Manually:
+Remember to manually log out if you wish to end your session.
+
 ## APIs Overview
 ### Create API
 
