@@ -8,10 +8,13 @@ class Account < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 8 }, if: -> { new_record? || !password.nil? }
 
-  after_create :send_welcome_email
-
+  #when user is newly created we send them welcome email
+  after_create :send_welcome_email 
+  
+  #when tfa status is changed, we reset session and send email 
   after_update :email_qr_and_reset_session, if: Proc.new { saved_change_to_attribute?(:tfa_status) }
   
+  #email containing welcome message with insturction to use the API
   def send_welcome_email
     AccountMailer.welcome_email(id).deliver_now
   end
@@ -21,8 +24,10 @@ class Account < ApplicationRecord
     send_welcome_email if tfa_status
   end
 
+  # tfa session is reset while access_token session stays intact
   def logout_actions
     self.update_column(:mfa_secret, nil)
     AccountMfaSession.destroy
+    #blacklisting tokens can be implemented but for now the tfa session handles the case
   end
 end

@@ -5,12 +5,14 @@ class AccountsController < ApplicationController
   UPDATABLE_ATTR = ["name", "password", "tfa_status"]
   SENSITIVE_DATA = [:password_digest, :google_secret, :mfa_secret]
 
+  # access_token needed for all operations except create
+  
   # GET /accounts/
   def show
     render json: @account.as_json(except: SENSITIVE_DATA), status: :ok
   end
 
-  # POST /accounts
+  # POST /account/register - email, password and confirmation
   def create
     @account = Account.new(account_params)
     if @account.save
@@ -36,9 +38,9 @@ class AccountsController < ApplicationController
   end
 
   # DELETE /accounts/
-  def destroy
-    @account.destroy
-  end
+  # def destroy NOT IMPLEMETED
+  #   @account.destroy
+  # end
 
   private
 

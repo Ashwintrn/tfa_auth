@@ -3,6 +3,7 @@ class AccountMfaSessionController < ApplicationController
   before_action :authorize_request
   before_action :code_validation, only: [:tfa_login]
 
+  # POST /auth/tfa_login - mfa_code, access_token
   def tfa_login
     @current_account.mfa_secret = params[:mfa_code]
     @current_account.save!
@@ -14,6 +15,7 @@ class AccountMfaSessionController < ApplicationController
     end
   end
 
+  # DELETE /auth/logout - access_token
   def logout
     begin
       @current_account.logout_actions
@@ -21,7 +23,6 @@ class AccountMfaSessionController < ApplicationController
     rescue => e
       render json: { error: 'Something went wrong, Please try again' }, status: 422
     end
-    #Blacklist tokens
   end
 
   private

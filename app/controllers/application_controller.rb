@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
     render json: { error: 'not_found' }
   end
 
+  # every requests pass through this and the access_token validation is done
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::API
     end
   end
 
+  #every requests pass through this and cookie validation from tfa along with access_token is done
   def authorize_session
     authorize_request
     if @current_account&.tfa_status
