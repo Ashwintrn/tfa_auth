@@ -36,15 +36,6 @@ RSpec.describe AccountsController, type: :controller do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
 
-      context 'when account is created but setting google secret' do
-        it 'renders a JSON response as unprocessable entity' do
-          expect_any_instance_of(Account).to receive(:set_google_secret).and_raise("Some issue")
-          post :create, params: valid_attributes
-          expect(response).to have_http_status(:unprocessable_entity)
-          res = JSON.parse(response.body)
-          expect(res["errors"]).to eq('Account created but unable to set google key. Please contact your operator')
-        end
-      end
     end
 
     context 'with invalid params' do

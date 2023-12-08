@@ -16,6 +16,7 @@ class Account < ApplicationRecord
   
   #email containing welcome message with insturction to use the API
   def send_welcome_email
+    self.set_google_secret if google_secret.nil?
     AccountMailer.welcome_email(id).deliver_now
   end
 
