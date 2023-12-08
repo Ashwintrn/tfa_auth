@@ -1,5 +1,4 @@
 class AuthenticationController < ApplicationController
-  before_action :authorize_session, except: :init_login
 
   # POST /auth/init_login - email,password
   def init_login

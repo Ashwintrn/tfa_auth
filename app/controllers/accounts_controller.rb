@@ -20,6 +20,7 @@ class AccountsController < ApplicationController
         @account.set_google_secret
       rescue => e
         render json: { errors: "Account created but unable to set google key. Please contact your operator" }, status: :unprocessable_entity
+        return
       end
       render json: @account.as_json(except: SENSITIVE_DATA), status: :created
     else
