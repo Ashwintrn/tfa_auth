@@ -8,8 +8,8 @@ default: &default
 development:
   <<: *default
   database: tfa_auth_db
-  username: Interview
-  password: Interview
+  username: <%= ENV["db_uname"] %>
+  password: <%= ENV["db_pass"] %>
   host: localhost
   port: 5432
 
@@ -28,8 +28,8 @@ development:
 test:
   <<: *default
   database: tfa_auth_test
-  username: Interview
-  password: Interview
+  username: <%= ENV["db_uname"] %>
+  password: <%= ENV["db_pass"] %>
   host: localhost
   port: 5432
 

@@ -33,3 +33,4 @@
 /public
 /log
 .byebug_history
+.env
