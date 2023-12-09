@@ -16,8 +16,8 @@ services:
     environment:
       - DB_UNAME=postgres
       - DB_PASS=postgres
-      - GMAIL_UNAME=gaming4ashwin@gmail.com
-      - GMAIL_PASS=unvbpicusuzbjnzi
+      - GMAIL_UNAME=insert_your_email
+      - GMAIL_PASS=insert_your_password
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/Rails-Docker
