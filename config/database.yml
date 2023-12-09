@@ -8,9 +8,9 @@ default: &default
 development:
   <<: *default
   database: tfa_auth_db
-  username: <%= ENV["db_uname"] %>
-  password: <%= ENV["db_pass"] %>
-  host: localhost
+  username: <%= ENV["DB_UNAME"] %>
+  password: <%= ENV["DB_PASS"] %>
+  host: db #localhost if without docker
   port: 5432
 
   # Schema search path. The server defaults to $user,public
@@ -28,9 +28,9 @@ development:
 test:
   <<: *default
   database: tfa_auth_test
-  username: <%= ENV["db_uname"] %>
-  password: <%= ENV["db_pass"] %>
-  host: localhost
+  username: <%= ENV["DB_UNAME"] %>
+  password: <%= ENV["DB_PASS"] %>
+  host: db
   port: 5432
 
 production:
