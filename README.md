@@ -1,5 +1,5 @@
 # tfa_auth - Two-Factor Authentication (TFA) App
-tfa_auth is a Rails application that demonstrates the implementation of two-factor authentication (TFA) using Google Authenticator. The app provides both traditional password-based authentication and TFA one-time password (OTP) authentication for enhanced security.
+tfa_auth is a Rails API-only application that demonstrates the implementation of two-factor authentication (TFA) using Google Authenticator. The app provides both traditional password-based authentication and TFA one-time password (OTP) authentication for enhanced security.
 
 ## Prerequisites
 - Git/Github
